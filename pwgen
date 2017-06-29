@@ -1,0 +1,42 @@
+#!/usr/bin/python
+
+import random
+import string
+import sys
+
+SPECIAL_CHARS = "_!?.&+-"
+LENGTH = 20
+
+if len(sys.argv) == 2:
+    length = int(sys.argv[1])
+    nrpasses = 1
+elif len(sys.argv) == 3:
+    length = int(sys.argv[1])
+    nrpasses = int(sys.argv[2])
+else:
+    length = LENGTH
+    nrpasses = 1
+
+def conplexitycheck(pwd):
+    pwd = set(pwd)
+    asciiset = set(string.ascii_letters)
+    digiset = set(string.digits)
+    upperset = set(string.uppercase)
+    digiset = set(SPECIAL_CHARS)
+    for testcase in (asciiset,digiset,upperset,digiset):
+        if len(testcase & pwd) < 1:
+            return False
+    return True
+
+def genpwd():
+    pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS, k=LENGTH))[:length]
+    while not conplexitycheck(pwd):
+        pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS * 2, k=LENGTH))[:length]
+    print pwd
+
+
+
+for pwd in range(nrpasses):
+    genpwd()
+    
+
