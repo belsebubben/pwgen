@@ -17,7 +17,7 @@ else:
     length = LENGTH
     nrpasses = 1
 
-def conplexitycheck(pwd):
+def complexitycheck(pwd):
     pwd = set(pwd)
     asciiset = set(string.ascii_letters)
     digiset = set(string.digits)
@@ -30,7 +30,7 @@ def conplexitycheck(pwd):
 
 def genpwd():
     pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS, k=LENGTH))[:length]
-    while not conplexitycheck(pwd):
+    while not complexitycheck(pwd):
         pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS * 2, k=LENGTH))[:length]
     print pwd
 
