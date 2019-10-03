@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import random
 import string
@@ -21,7 +21,7 @@ def complexitycheck(pwd):
     pwd = set(pwd)
     asciiset = set(string.ascii_letters)
     digiset = set(string.digits)
-    upperset = set(string.uppercase)
+    upperset = set(string.ascii_uppercase)
     digiset = set(SPECIAL_CHARS)
     for testcase in (asciiset,digiset,upperset,digiset):
         if len(testcase & pwd) < 1:
@@ -32,7 +32,7 @@ def genpwd():
     pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS, k=LENGTH))[:length]
     while not complexitycheck(pwd):
         pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS * 2, k=LENGTH))[:length]
-    print pwd
+    print(pwd)
 
 
 
