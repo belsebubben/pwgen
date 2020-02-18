@@ -4,7 +4,8 @@ import random
 import string
 import sys
 
-SPECIAL_CHARS = "_!?.&+-"
+SPECIAL_CHARS = "_.+-*=%#"
+AMBIGUOUS = "B8G6I1l0OQDS5Z2"
 LENGTH = 20
 
 if len(sys.argv) == 2:
@@ -29,11 +30,12 @@ def complexitycheck(pwd):
     return True
 
 def genpwd():
-    pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS, k=LENGTH))[:length]
+    chars = set(string.ascii_letters + string.digits + SPECIAL_CHARS ) - set(AMBIGUOUS)
+    chars = ''.join(chars) * 10
+    pwd = ''.join(random.sample(chars, k=LENGTH))[:length]
     while not complexitycheck(pwd):
-        pwd = ''.join(random.sample(string.ascii_letters * 7 + string.digits * 7 + SPECIAL_CHARS * 2, k=LENGTH))[:length]
+        pwd = ''.join(random.sample(chars, k=LENGTH))[:length]
     print(pwd)
-
 
 
 for pwd in range(nrpasses):
